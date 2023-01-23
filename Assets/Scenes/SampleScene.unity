@@ -220,9 +220,11 @@ GameObject:
   - component: {fileID: 566687610}
   - component: {fileID: 566687609}
   - component: {fileID: 566687613}
+  - component: {fileID: 566687614}
+  - component: {fileID: 566687615}
   m_Layer: 0
   m_Name: PC
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -299,7 +301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 566687608}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.38, y: 1.23, z: 0.041617315}
+  m_LocalPosition: {x: -5.38, y: 3.26, z: 0.041617315}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -322,6 +324,33 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &566687614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566687608}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6f9fc24b05e9cb47ab78ad3cea78b4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwableObj: {fileID: 5908243970488221390, guid: a7422c884f70db34fae530bbb737df41, type: 3}
+--- !u!114 &566687615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566687608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44e9ce995d6b644790c4e6b8ded59ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carrier: {fileID: 0}
+  rigidbodies: []
 --- !u!1 &592069315
 GameObject:
   m_ObjectHideFlags: 0
@@ -462,10 +491,10 @@ GameObject:
   - component: {fileID: 1203735986}
   - component: {fileID: 1203735985}
   - component: {fileID: 1203735990}
-  - component: {fileID: 1203735992}
+  - component: {fileID: 1203735991}
   m_Layer: 0
   m_Name: NutPlanet
-  m_TagString: Untagged
+  m_TagString: target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -477,7 +506,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203735984}
-  m_Material: {fileID: 13400000, guid: 5a15357172121704ea7b986657913a6a, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -561,14 +590,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664140c325ce7c641881a20216ec8c1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 500
   ForwardX: 0
   ForwardY: 0
   ForwardZ: 0
   ReverseX: 0
   ReverseY: 0
   ReverseZ: 1
---- !u!114 &1203735992
+--- !u!114 &1203735991
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -599,7 +628,7 @@ GameObject:
   - component: {fileID: 2127664635}
   m_Layer: 0
   m_Name: Planet (1)
-  m_TagString: Untagged
+  m_TagString: target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
