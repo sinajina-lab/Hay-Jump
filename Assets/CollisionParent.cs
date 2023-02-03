@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CollisionParent : MonoBehaviour
 {
-    [SerializeField] GameObject parentObject;
-    [SerializeField] bool isParent;
+    public GameObject parentObject;
+    private bool isParent;
     private Rigidbody rb;
     private void Start()
     {
@@ -19,8 +19,7 @@ public class CollisionParent : MonoBehaviour
             if (!isParent)
             {
                 // Make this object a child of the parent object
-                transform.parent = parentObject.transform;
-                //transform.SetParent(parentObject.transform);
+                transform.SetParent(parentObject.transform);
                 rb.isKinematic = true;
                 isParent = true;
             }
@@ -38,4 +37,5 @@ public class CollisionParent : MonoBehaviour
             isParent = false;
         }
     }
+
 }
