@@ -36,7 +36,7 @@ public class CollisionParent2D : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         // Check if the collision is with the desired parent object
-       /* if (other.gameObject.tag == "target")
+        if (other.gameObject.tag == "target")
         {
             //get the normal angle
            Vector2 normalAngle = other.contacts[0].normal;
@@ -53,7 +53,7 @@ public class CollisionParent2D : MonoBehaviour
             //touchPoint = feet.position;
             Vector2 touchPoint = (transform.position);
             rb.velocity = Vector2.zero;
-        } */
+        }
     }
     void LaunchToNextTarget()
     {
