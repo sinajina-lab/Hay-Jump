@@ -7,7 +7,7 @@ using UnityEngine;
 public class CollisionParent2D : MonoBehaviour
 {
     [SerializeField] GameObject parentObject;
-    [SerializeField] bool isParent = false;
+    //[SerializeField] bool isParent = false;
 
     [SerializeField] float launchForce = 100f;
     private Rigidbody2D rb;
@@ -16,20 +16,27 @@ public class CollisionParent2D : MonoBehaviour
     public Transform feet;
     public Collider2D feetCollider;//ToDo:moving logic to feet collider
     public LayerMask circleMask;
+
+    private Quaternion startRotation;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        //startRotation = transform.rotation;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
         // Check if the collision is with the desired parent object
         if (other.gameObject.tag == "target")
         {
-            transform.SetParent(other.gameObject.transform);
+            //transform.SetParent(other.gameObject.transform);
             
             rb.isKinematic = true;
+            
+            touchPoint = feetCollider.bounds.center;
             //touchPoint = feet.position;
-            Vector2 touchPoint = (transform.position);
+            
             rb.velocity = Vector2.zero;
         }
     }
@@ -46,12 +53,14 @@ public class CollisionParent2D : MonoBehaviour
             transform.SetParent(other.gameObject.transform);
 
             //set the local rotation z to the normal angle
-            Quaternion localAngles = Quaternion.Euler(0, 0, normalAngle.y);
+            Quaternion localAngles = Quaternion.Euler(0, 0, Mathf.Atan2(normalAngle.y, normalAngle.x) * Mathf.Rad2Deg);
             transform.localRotation = localAngles;
 
             rb.isKinematic = true;
+            
+            touchPoint = feetCollider.bounds.center;
             //touchPoint = feet.position;
-            Vector2 touchPoint = (transform.position);
+            
             rb.velocity = Vector2.zero;
         }
     }
@@ -60,6 +69,8 @@ public class CollisionParent2D : MonoBehaviour
         rb.isKinematic = false;
 
         transform.SetParent(null);
+
+        transform.rotation = startRotation;
         
         Vector2 launchDirection = (touchPoint - (Vector2)transform.position).normalized;
         
@@ -74,7 +85,7 @@ public class CollisionParent2D : MonoBehaviour
         if (Physics2D.OverlapPoint(touchPoint, circleMask))
         {
             transform.position = touchPoint;
-        }
+        } 
 
         /*  if (Physics2D.OverlapPoint(feet.position, circleMask))
           {
