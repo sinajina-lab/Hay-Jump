@@ -4,27 +4,35 @@ using UnityEngine;
 
 public class NewLaserScript : MonoBehaviour
 {
-    private LineRenderer lineRenderer;
-    [SerializeField] Transform startPoint;
+    [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] Transform laserPosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
+        //lineRenderer.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        lineRenderer.SetPosition(0, startPoint.position);
-        RaycastHit hit;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right);
+        lineRenderer.SetPosition(0, laserPosition.position);
 
-        if(Physics.Raycast(transform.position, -transform.right, out hit))
+        if(hit)
         {
-            if(hit.collider)
-            {
-                lineRenderer.SetPosition(1, hit.point);
-            }
+            lineRenderer.SetPosition(1, hit.point);
         }
+        else
+        {
+            lineRenderer.SetPosition(1, transform.right * 100);
+        }
+
+        //StartCoroutine(PowerLaser());
     }
+    //IEnumerator TurnLaserOnAndOff()
+    //{
+    //    yield return new WaitForSeconds(.1f);
+    //    GetComponent<LineRenderer>().enabled = true;
+    //}
 }
