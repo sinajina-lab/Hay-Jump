@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ThrowableScript : MonoBehaviour
 {
-    public Rigidbody throwableObj;
-    private float speed = 30f;
+    [SerializeField] Rigidbody throwableObj;
+    [SerializeField] float speed = 30f;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -16,12 +16,12 @@ public class ThrowableScript : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        //if(Input.GetMouseButtonDown(0))
-        //{
-        //    Rigidbody instantiatedThrowable = Instantiate(throwableObj, transform.position, transform.rotation);
-        //    instantiatedThrowable.velocity = transform.forward * speed;
-        //}
+        if (Input.GetMouseButtonDown(0))
+        {
+            Rigidbody instantiatedThrowable = Instantiate(throwableObj, transform.position, transform.rotation);
+            instantiatedThrowable.velocity = transform.forward * speed;
+        }
     }
 }
