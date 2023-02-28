@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class MineBomb : MonoBehaviour
@@ -12,6 +13,9 @@ public class MineBomb : MonoBehaviour
     [SerializeField] LayerMask explodableLayerMask;
 
     [SerializeField] GameObject explosionEffect;
+
+    [SerializeField] Transform spawnPoint;
+    [SerializeField] int damageAmount = 10;
 
     bool hasExploded = false;
 
@@ -58,5 +62,17 @@ public class MineBomb : MonoBehaviour
 
         Destroy(gameObject);
     }
+    void Damage(GameObject hitObject)
+    {
+        // Check if the hit object has a PlayerHealth script attached
+        PlayerHealth playerHealth = GetComponent<PlayerHealth>();
+        if (playerHealth != null)
+        {
+            // Apply damage to the player
+            playerHealth.TakeDamage(damageAmount);
 
+            // Respawn the player at the spawn point
+            playerHealth.Respawn(spawnPoint.position);
+        }
+    }
 }
