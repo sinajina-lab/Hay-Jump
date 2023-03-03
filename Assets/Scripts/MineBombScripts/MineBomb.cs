@@ -30,12 +30,12 @@ public class MineBomb : MonoBehaviour
 
         if (countdown <= 0f && !hasExploded) // hasExploded = false
         {
-            Explode();
+            //Explode();
             hasExploded = true;
         }
     }
 
-    void Explode()
+   /* void Explode()
     {
         // show effect
         Instantiate(explosionEffect, transform.position, transform.rotation);
@@ -61,7 +61,7 @@ public class MineBomb : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }
+    } */
     void Damage(GameObject hitObject)
     {
         // Check if the hit object has a PlayerHealth script attached
@@ -75,4 +75,34 @@ public class MineBomb : MonoBehaviour
             playerHealth.Respawn(spawnPoint.position);
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            // show effect
+            Instantiate(explosionEffect, transform.position, transform.rotation);
+
+            // Detach children
+            transform.DetachChildren();
+
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, blastRadius);
+
+            foreach (Collider2D nearbyObject in colliders)
+            {
+                if (explodableLayerMask == (explodableLayerMask | (1 << nearbyObject.gameObject.layer)))
+                {
+                    Destroy(nearbyObject.gameObject);
+                }
+
+                // Add force
+                Rigidbody2D rb = nearbyObject.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.AddForce(rb.velocity * explosionForce, ForceMode2D.Impulse);
+                }
+            }
+
+            Destroy(gameObject);
+        }
+    }       
 }

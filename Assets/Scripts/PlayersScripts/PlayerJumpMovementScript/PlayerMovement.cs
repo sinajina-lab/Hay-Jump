@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<CircleCollider2D>().enabled = false;
         rb.isKinematic = false;
         transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
-        rb.AddForce(launchAngle * 40f,ForceMode2D.Impulse);
+        rb.AddForce(launchAngle * 25f,ForceMode2D.Impulse);
         Debug.Log($"rotation: {transform.rotation}");
         StartCoroutine(ResetPlayer());
     }
