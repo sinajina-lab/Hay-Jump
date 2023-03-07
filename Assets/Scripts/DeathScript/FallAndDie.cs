@@ -23,7 +23,7 @@ public class FallAndDie : MonoBehaviour
     }
     void ResetGame()
     {
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     void RespawnPoint()
@@ -34,7 +34,8 @@ public class FallAndDie : MonoBehaviour
     {
         if(collision.gameObject.tag == "death")
         {
-            transform.position = spawnPoint.position;
+            //transform.position = spawnPoint.position;
+            ResetGame();
         }
     }
 }

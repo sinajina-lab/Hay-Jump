@@ -45,25 +45,57 @@ public class SimpleFlash : MonoBehaviour
             // so we can switch back to it after the flash ended.
             originalMaterial = spriteRenderer.material;
         }
+    private void OnCollisionEnter(Collision collision)
+    {
+        StartFlash();
+    }
 
-        #endregion
+    private void OnCollisionExit(Collision collision)
+    {
+        StopFlash();
+    }
 
-        public void Flash()
+    #endregion
+    private void StartFlash()
+    {
+        //the StartFlash() method starts the coroutine by calling StartCoroutine(FlashRoutine())
+        //and sets the flashRoutine variable to the reference returned by StartCoroutine().
+        if (flashRoutine == null)
         {
-            // If the flashRoutine is not null, then it is currently running.
-            if (flashRoutine != null)
-            {
-                // In this case, we should stop it first.
-                // Multiple FlashRoutines the same time would cause bugs.
-                StopCoroutine(flashRoutine);
-            }
+            flashRoutine = StartCoroutine(FlashRoutine());
+        }
+    }
+
+    private void StopFlash()
+    {
+        //the StartFlash() method does not start a new coroutine and does nothing. 
+        if (flashRoutine != null)
+        {
+            StopCoroutine(flashRoutine);
+            flashRoutine = null;
+            spriteRenderer.material = originalMaterial;
+        }
+    }
+
+
+    public void Flash()
+        {
+            //// If the flashRoutine is not null, then it is currently running.
+            //if (flashRoutine != null)
+            //{
+            //    // In this case, we should stop it first.
+            //    // Multiple FlashRoutines the same time would cause bugs.
+            //    StopCoroutine(flashRoutine);
+            //}
 
         // Start the Coroutine, and store the reference for it.
-        flashRoutine = StartCoroutine(FlashRoutine());
+       // flashRoutine = StartCoroutine(FlashRoutine());
         //StartCoroutine(FlashRoutine());
         }
 
         private IEnumerator FlashRoutine()
+        {
+        while(true)
         {
             // Swap to the flashMaterial.
             spriteRenderer.material = flashMaterial;
@@ -74,9 +106,12 @@ public class SimpleFlash : MonoBehaviour
             // After the pause, swap back to the original material.
             spriteRenderer.material = originalMaterial;
 
+            Debug.Log($"Inside FlashRoutine() Done with Coroutine!");
             // Set the routine to null, signaling that it's finished.
-            flashRoutine = null;
+            // flashRoutine = null;
         }
+
+    }
 
         #endregion
 }

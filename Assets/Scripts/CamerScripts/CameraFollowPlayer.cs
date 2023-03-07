@@ -19,18 +19,18 @@ public class CameraFollowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerPosition = new Vector3(player.transform.position.x, 0, 0);
+        playerPosition = new Vector3(player.transform.position.x, 0, -10f);
         //playerPosition = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
 
         if(player.transform.localScale.x > 0.0f)
         {
-            playerPosition = new Vector3(playerPosition.x + 0, 0);
+            playerPosition = new Vector3(playerPosition.x + 0, 0,-10f);
             //playerPosition = new Vector3(playerPosition.x + offset, playerPosition.y, playerPosition.z);
         }
 
         else
         {
-            playerPosition = new Vector3(playerPosition.x - 0, 0);
+            playerPosition = new Vector3(playerPosition.x - 0, 0,-10f);
             //playerPosition = new Vector3(playerPosition.x - offset, playerPosition.y, playerPosition.z);
         }
         transform.position = Vector3.Lerp(playerPosition, playerPosition, 0);

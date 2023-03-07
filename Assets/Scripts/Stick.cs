@@ -7,13 +7,13 @@ using UnityEngine;
 public class Stick : MonoBehaviour
 {
 
-    public string StuckObjectTag = "Wall";
+    public string StuckObjectTag = "target";
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag(StuckObjectTag))
         {
-            GetComponent<Rigidbody>().isKinematic = true;
+            GetComponent<Rigidbody2D>().isKinematic = true;
         }
     }
 
