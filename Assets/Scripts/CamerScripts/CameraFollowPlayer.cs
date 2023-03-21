@@ -8,7 +8,7 @@ public class CameraFollowPlayer : MonoBehaviour
     [SerializeField] float offset;
     [SerializeField] float offsetSmoothing;
     
-    Vector3 playerPosition;
+    public Vector3 playerPosition;
 
     // Start is called before the first frame update
     void Start()
